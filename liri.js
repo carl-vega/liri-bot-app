@@ -2,24 +2,39 @@ require("dotenv").config();
 var request = require("request");
 var Spotify = require("node-spotify-api");
 var keys = require("./keys");
+var moment = require("moment");
+var fs = require("fs");
+var something = [];
 
 var divider = "----------------------";
 
 var spotify = new Spotify(keys.spotify);
 
 var option = process.argv[2];
-var input = process.argv.slice(3).join(" ");
 
-if (option === "concert-this") {
-  bandsInTown(input);
-} else if (option === "spotify-this-song") {
-  spotifyAPI(input);
-} else if (option === "movie-this") {
-  omdbAPI(input);
-} else if (option === "do-what-it-says") {
-  random(input);
+if (option === "do-what-it-says") {
+  fs.readFile("random.txt", function(err, data) {
+    if (err) throw err;
+    var split = data.toString().split(",");
+    doWhatItSays(split[0], split[1]);
+  });
 } else {
-  console.log("Typing failed");
+  doWhatItSays(option, process.argv.slice(3).join(" "));
+}
+
+function doWhatItSays(option, search) {
+  switch (option) {
+    case "concert-this":
+      return bandsInTown(search);
+    case "spotify-this-song":
+      return spotifyAPI(search);
+    case "movie-this":
+      return omdbAPI(search);
+    case "feeling-lucky":
+      return feelingLucky();
+    default:
+      console.log("Typing failed");
+  }
 }
 
 function bandsInTown(artist) {
@@ -40,7 +55,7 @@ function bandsInTown(artist) {
         jsonData.venue.region +
         ", " +
         jsonData.venue.country,
-      "Date of the Event: " + jsonData.datetime
+      "Date of the Event: " + moment(jsonData.datetime).format("MM/DD/YYYY")
     ].join("\n\n");
     console.log("\n" + bandsData);
   });
@@ -95,4 +110,26 @@ function omdbAPI(movie) {
   });
   // var URL = "http://www.omdbapi.com/?t=" + movie + "&" + ;
 }
-// function random() {}
+function feelingLucky() {
+  var spin1 = Math.floor(Math.random() * 3);
+  var spin2 = Math.floor(Math.random() * 20);
+
+  fs.readFile("feeling-lucky.json", "utf8", function(err, data) {
+    if (err) throw err;
+    something = JSON.parse(data);
+
+    if (spin1 === 0) {
+      var pass = something[spin1][spin2];
+      console.log("You are seeing: concert-this\n\nArtist: " + pass);
+      bandsInTown(pass);
+    } else if (spin1 === 1) {
+      var pass = something[spin1][spin2];
+      console.log("You are seeing: spotify-this-song\n\nSong: " + pass);
+      spotifyAPI(pass);
+    } else if (spin1 === 2) {
+      var pass = something[spin1][spin2];
+      console.log("You are seeing: movie-this\n\nMovie: " + pass);
+      omdbAPI(pass);
+    }
+  });
+}
