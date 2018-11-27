@@ -10,11 +10,11 @@ A Node.js app with one of three requested commands searches for different querie
 
 ### Dependencies
 
-- Sign up for a BandInTown app ID [here.](https://manager.bandsintown.com/support/bandsintown-api) This should be as soon as possible since the service requires a written email request to the support staff that will be responded with a key to the email address used.
+- Sign up for a BandInTown app ID [here.](https://manager.bandsintown.com/support/bandsintown-api) This should be as soon as possible since the service requires a written email request to the support staff that will be responded with a key to the email address used.  
   ![Directions](images/BandsInTown-Developer.gif "BandsInTown for Developers")
-- A Spotify ID key and Spotify secret key will be needed as well as a Spotify user account. You can get them [here.](https://developer.spotify.com "Spotify for Developers")
+- A Spotify ID key and Spotify secret key will be needed as well as a Spotify user account. You can get them [here.](https://developer.spotify.com "Spotify for Developers")  
   ![Directions](images/Spotify-Developer.gif)
-- Sign up for OMDB apikey [here.](http://www.omdbapi.com/)
+- Sign up for OMDB apikey [here.](http://www.omdbapi.com/)  
   ![Directions](images/OMDB-Developers.gif)
 
 ### Installing
