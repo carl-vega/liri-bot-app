@@ -32,6 +32,8 @@ function doWhatItSays(option, search) {
       return omdbAPI(search);
     case "feeling-lucky":
       return feelingLucky();
+    case "help":
+      return help();
     default:
       console.log("Typing failed");
   }
@@ -132,4 +134,9 @@ function feelingLucky() {
       omdbAPI(pass);
     }
   });
+}
+function help() {
+  console.log(
+    "\nnode liri.js concert-this <artist/band name>\nnode liri.js spotify-this-song <song title>\nnode liri.js movie-this <movie title>\nnode liri.js do-what-it-says\nnode liri.js feeling-lucky"
+  );
 }
