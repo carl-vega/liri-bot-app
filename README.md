@@ -72,7 +72,7 @@ Twitter: [@Carljasonvega](https://twitter.com/Carljasonvega)
 
 ## License
 
-This porject has not been licensed aat the time, once done it will be open sourced.
+Open sourced via ISC license.
 
 ## Acknowledgments
 
